@@ -1,0 +1,77 @@
+.categorias-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+header {
+  margin-bottom: 25px;
+}
+
+header p {
+  color: #666;
+}
+
+.formulario-card {
+  background: #f8f8f8;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 15px;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+button {
+  padding: 9px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+form button {
+  background: #1976d2;
+  color: white;
+}
+
+.btn-danger {
+  background: #d32f2f;
+  color: white;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background: #f2f2f2;
+}

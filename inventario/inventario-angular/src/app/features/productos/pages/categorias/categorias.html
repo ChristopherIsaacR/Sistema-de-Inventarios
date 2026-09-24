@@ -1,0 +1,96 @@
+
+<div class="categorias-container">
+
+  <header>
+    <h1>Categorías</h1>
+    <p>Administración de categorías de productos</p>
+  </header>
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  <section class="formulario-card">
+
+    <h2>Nueva categoría</h2>
+
+    <form (ngSubmit)="crearCategoria()">
+
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+
+        <input
+          id="nombre"
+          name="nombre"
+          type="text"
+          [(ngModel)]="nombre"
+          placeholder="Ej. Laptops"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+
+        <textarea
+          id="descripcion"
+          name="descripcion"
+          [(ngModel)]="descripcion"
+          rows="3"
+          placeholder="Descripción de la categoría"
+        ></textarea>
+      </div>
+
+      <button type="submit" [disabled]="guardando">
+        {{ guardando ? 'Guardando...' : 'Crear categoría' }}
+      </button>
+
+    </form>
+
+  </section>
+
+  @if (cargando) {
+    <p>Cargando categorías...</p>
+  }
+
+  @if (!cargando && categorias.length === 0) {
+    <p>No hay categorías registradas.</p>
+  }
+
+  @if (!cargando && categorias.length > 0) {
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (categoria of categorias; track categoria.id) {
+          <tr>
+            <td>{{ categoria.id }}</td>
+            <td>{{ categoria.nombre }}</td>
+            <td>{{ categoria.descripcion }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn-danger"
+                (click)="eliminarCategoria(categoria)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+
+    </table>
+
+  }
+
+</div>

@@ -1,0 +1,60 @@
+<div class="dashboard">
+
+  <header>
+    <h1>Sistema de Inventarios</h1>
+
+    <p>Panel principal</p>
+    
+  </header>
+
+  <main>
+
+    <div class="dashboard-header">
+
+  <div>
+    <h1>Dashboard</h1>
+    <p>Bienvenido, {{ usuario }}</p>
+  </div>
+
+  <button
+    type="button"
+    (click)="logout()"
+  >
+    Cerrar sesión
+  </button>
+
+</div>
+
+    <div class="card">
+      <h2>Productos</h2>
+
+      <p>
+        Consulta y administra los productos del inventario.
+      </p>
+
+      <a routerLink="/productos">
+        Administrar productos
+      </a>
+    </div>
+    <a routerLink="/categorias">
+        Categorías
+    </a>
+    <div class="card">
+      <h2>Inventario</h2>
+
+      <p>
+        Próximamente podremos consultar las existencias.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Movimientos</h2>
+
+      <p>
+        Próximamente podremos registrar entradas y salidas.
+      </p>
+    </div>
+
+  </main>
+
+</div>

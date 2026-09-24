@@ -1,0 +1,209 @@
+
+<div class="productos-container">
+
+  <header class="productos-header">
+    <div>
+      <h1>Productos</h1>
+      <p>Administración del inventario</p>
+    </div>
+
+    <button type="button" (click)="nuevoProducto()">
+      + Nuevo producto
+    </button>
+  </header>
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+
+  @if (mostrarFormulario) {
+
+    <section class="formulario-card">
+
+      <h2>
+        {{ editandoId === null ? 'Nuevo producto' : 'Editar producto' }}
+      </h2>
+
+      <form [formGroup]="formulario" (ngSubmit)="guardarProducto()">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label for="codigo">Código</label>
+            <input
+              id="codigo"
+              type="text"
+              formControlName="codigo"
+            >
+
+            @if (
+              formulario.controls.codigo.invalid &&
+              formulario.controls.codigo.touched
+            ) {
+              <small>El código es obligatorio.</small>
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input
+              id="nombre"
+              type="text"
+              formControlName="nombre"
+            >
+
+            @if (
+              formulario.controls.nombre.invalid &&
+              formulario.controls.nombre.touched
+            ) {
+              <small>El nombre es obligatorio.</small>
+            }
+          </div>
+
+          <div class="form-group full">
+            <label for="descripcion">Descripción</label>
+            <textarea
+              id="descripcion"
+              formControlName="descripcion"
+              rows="3"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+
+  <label for="categoria">
+    Categoría
+  </label>
+
+  <select
+    id="categoria"
+    formControlName="categoriaId"
+  >
+
+    <option [ngValue]="null">
+      Sin categoría
+    </option>
+
+    @for (categoria of categorias; track categoria.id) {
+
+      <option [ngValue]="categoria.id">
+        {{ categoria.nombre }}
+      </option>
+
+    }
+
+  </select>
+
+</div>
+          <div class="form-group">
+            <label for="precio">Precio</label>
+            <input
+              id="precio"
+              type="number"
+              step="0.01"
+              min="0"
+              formControlName="precio"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="stock">Stock</label>
+            <input
+              id="stock"
+              type="number"
+              min="0"
+              formControlName="stock"
+            >
+          </div>
+
+        </div>
+        
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="cancelarFormulario()"
+          >
+            Cancelar
+          </button>
+
+          <button
+            type="submit"
+            [disabled]="guardando"
+          >
+            {{ guardando ? 'Guardando...' : 'Guardar' }}
+          </button>
+
+        </div>
+
+      </form>
+    </section>
+  }
+
+  @if (cargando) {
+    <p>Cargando productos...</p>
+  }
+
+  @if (!cargando && productos.length === 0) {
+    <p>No hay productos registrados.</p>
+  }
+
+  @if (!cargando && productos.length > 0) {
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        @for (producto of productos; track producto.id) {
+
+          <tr>
+            <td>{{ producto.id }}</td>
+            <td>{{ producto.codigo }}</td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.descripcion }}</td>
+            <td>${{ producto.precio | number:'1.2-2' }}</td>
+            <td>{{ producto.stock }}</td>
+
+            <td class="acciones">
+
+              <button
+                type="button"
+                (click)="editarProducto(producto)"
+              >
+                Editar
+              </button>
+
+              <button
+                type="button"
+                class="btn-danger"
+                (click)="eliminarProducto(producto)"
+              >
+                Eliminar
+              </button>
+
+            </td>
+          </tr>
+
+        }
+
+      </tbody>
+
+    </table>
+  }
+
+</div>
+
